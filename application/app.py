@@ -19,23 +19,28 @@ def form():
 
 @app.route("/api", methods=["POST"])
 def api_post():
-    user_input = request.form["search"]
-    # tomma strängar för att undvika fel vid tom input
-    topic = ""
-    language = ""
-    api_lang = ""
-    try:
-        language = request.form["language"]
-        api_lang = "languages=" + language
-    except: 
-        pass
-    try:
-        topic = request.form["topic"]
-    except:
-        pass
-    
-    api_url = f"https://gutendex.com/books/?search={user_input}&{api_lang}&{topic}"
-        
+    user_input = request.form.get("search", "").strip()  # Using strip to remove any leading/trailing spaces
+    topic = request.form.get("topic", "").strip()
+    language = request.form.get("language", "").strip()
+
+    # Create a list to store valid query parameters
+    params = []
+
+    # Add search keyword if it's present
+    if user_input:
+        params.append(f"search={user_input}")
+
+    # Add language if it's present
+    if language:
+        params.append(f"languages={language}")
+
+    # Add topic if it's present
+    if topic:
+        params.append(f"topic={topic}")
+
+    # Form the API URL
+    base_url = "https://gutendex.com/books/"
+    api_url = f"{base_url}?{'&'.join(params)}"
 
     data = func.json_data_to_html_table(api_url)
     return render_template("table.html", data=data)
