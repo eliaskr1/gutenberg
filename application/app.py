@@ -16,7 +16,7 @@ def form():
 
 @app.route("/api", methods=["POST"])
 def api():
-    return render_template("api.html")
+    return render_template("table.html")
 
 @app.errorhandler(404)
 def page_not_found(error):
