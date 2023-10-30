@@ -1,2 +1,37 @@
-{% extends "layout.html" %}
-{% block title %}Index{% endblock %}
+{% extends "layout.html" %} {% block title %}Index{% endblock %} {% block
+content %}
+<div class="container">
+    <form action="api" method="POST">   
+        <div class="input-group input-group-lg p-3">
+            <div class="input-group-prepend hover-button">
+                <button type="submit" class="input-group-text">Search</button>
+            </div>
+        <input
+            type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <select id="topic" name="topic">
+              <option value="" disabled selected>Choose topic</option>
+              <option class="dropdown-divider" disabled>_________</option>
+              <option value="SE2">Sundsvall / Norra Mellansverige</option>
+              <option value="SE3">Stockholm / Södra Mellansverig</option>
+              <option value="SE4">Malmö / Södra Sverige</option>
+            </select>
+          </div>
+          <div class="col">
+            <select id="language" name="language">
+              <option value="" disabled selected>Choose language</option>
+              <option class="dropdown-divider" disabled>_________</option>
+              <option value="SE2">Sundsvall / Norra Mellansverige</option>
+              <option value="SE3">Stockholm / Södra Mellansverig</option>
+              <option value="SE4">Malmö / Södra Sverige</option>
+            </select>
+          </div>
+    </div>   
+</div>
+
+{% endblock %}
