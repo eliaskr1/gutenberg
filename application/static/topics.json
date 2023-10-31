@@ -1,0 +1,79 @@
+[
+    {
+      "api_key": "classic",
+      "display_name": "Classic Literature"
+    },
+    {
+      "api_key": "poetry",
+      "display_name": "Poetry"
+    },
+    {
+      "api_key": "history",
+      "display_name": "History"
+    },
+    {
+      "api_key": "religion",
+      "display_name": "Religion"
+    },
+    {
+      "api_key": "science",
+      "display_name": "Science"
+    },
+    {
+      "api_key": "philosophy",
+      "display_name": "Philosophy"
+    },
+    {
+      "api_key": "biography",
+      "display_name": "Biography"
+    },
+    {
+      "api_key": "adventure",
+      "display_name": "Adventure and Adventure Stories"
+    },
+    {
+      "api_key": "drama",
+      "display_name": "Drama"
+    },
+    {
+      "api_key": "children",
+      "display_name": "Children's Literature"
+    },
+    {
+      "api_key": "mystery",
+      "display_name": "Mystery Novels"
+    },
+    {
+      "api_key": "theater",
+      "display_name": "Theater"
+    },
+    {
+      "api_key": "novel",
+      "display_name": "Novels"
+    },
+    {
+      "api_key": "war",
+      "display_name": "War History"
+    },
+    {
+      "api_key": "mythology",
+      "display_name": "Mythology"
+    },
+    {
+      "api_key": "art",
+      "display_name": "Art"
+    },
+    {
+      "api_key": "cooking",
+      "display_name": "Cooking"
+    },
+    {
+      "api_key": "psychology",
+      "display_name": "Psychology"
+    },
+    {
+      "api_key": "music",
+      "display_name": "Music"
+    }
+  ]
+  

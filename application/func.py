@@ -21,9 +21,4 @@ def json_data_to_html_table(api_url, columns=None):
 
         return table_data
     except Exception as e:
-        # Om man försöker ladda elpriser som inte har publicerats ännu.
-        if isinstance(e, error.HTTPError) and e.code == 404:
-            return "Sidan existerar inte."
-
-        # Plats för annan eventuell felhantering
         return "Ett fel uppstod. Kontakta administratören för hjälp."
