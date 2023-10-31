@@ -25,16 +25,16 @@
             <select id="topic" name="topic">
                 <option value="" disabled selected>Choose topic</option>
                 <option class="dropdown-divider" disabled>_________</option>
-                <option value="SE2">Sundsvall / Norra Mellansverige</option>
-                <option value="SE3">Stockholm / Södra Mellansverig</option>
-                <option value="SE4">Malmö / Södra Sverige</option>
+                {% for row in topics %}
+                <option value="{{ row["api_key"] }}">{{ row["display_name"] }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="col">
             <select id="language" name="language">
                 <option disabled selected>Choose language</option>
                 <option class="dropdown-divider" disabled>_________</option>
-                {% for row in data %}
+                {% for row in langs %}
                 <option value="{{ row["code"] }}">{{ row["name"] }}</option>
                 {% endfor %}
             </select>
