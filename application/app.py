@@ -1,7 +1,4 @@
 from flask import Flask, render_template, request, make_response
-import urllib.request
-import ssl
-import pandas as pd
 import json
 from application import func
 
@@ -63,12 +60,11 @@ def api_post():
     resp = make_response(render_template("table.html", previous_search=previous_search, saved_search=user_input, data=data))
     resp.set_cookie("search_query", user_input)
 
-    return resp  # Returns the response with the cookie for the POST request
+    return resp  # Returns the response with the cookie and renders the template to show data
 
 
 
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("index.html"), 404
-
 
