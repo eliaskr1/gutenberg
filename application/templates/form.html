@@ -1,16 +1,45 @@
-{% extends "layout.html" %}
-{% block title %}Form{% endblock %}
+
+<!-- 
+  This is the index page of the application.
+  It extends the layout.html file and sets the title to "Index".
+  The page contains a search form with a search button and a text input field.
+  It also contains two dropdown menus for selecting a topic and a language.
+-->
+{% extends "layout.html" %} 
+{% block title %}Index{% endblock %} 
 {% block content %}
+<!-- search bar -->
 <div class="container">
-    <div class="row p-5">
-        <div class="col-1"></div>
-        <div class="col-10 border p-3">
-            <form action="api" method="post">
-                
-                <button type="submit" class="btn btn-primary mt-5">Submit</button> 
-            </form>
-        </div>
-        <div class="col-1"></div>
+  <form action="/api" method="POST">
+    <div class="input-group input-group-lg p-3">
+      <div class="input-group-prepend hover-button">
+        <button type="submit" class="input-group-text">Search</button>
+      </div>
+      <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="search_query" value="{{ previous_search }}">
     </div>
+
+  <!-- Dropdown menus -->
+  <div class="row">
+    <div class="col-md-6">
+      <select class="form-control" id="topic" name="topic">
+        <option value="" disabled selected>Choose topic</option>
+        <option class="dropdown-divider" disabled>_________</option>
+        {% for row in topics %}
+        <option value="{{ row["api_key"] }}">{{ row["display_name"] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-6">
+      <select class="form-control" id="language" name="language">
+        <option value="" disabled selected>Choose language</option>
+        <option class="dropdown-divider" disabled>_________</option>
+        {% for row in langs %}
+        <option value="{{ row["code"] }}">{{ row["name"] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  </form>
 </div>
+
 {% endblock %}

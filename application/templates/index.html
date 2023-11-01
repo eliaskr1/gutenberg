@@ -15,9 +15,9 @@
       <div class="input-group-prepend hover-button">
         <button type="submit" class="input-group-text">Search</button>
       </div>
-    <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="search"/>
+        <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" name="search_query" value="{{ previous_search }}"/>
     </div>
-</div>
+  </div>
 <!-- dropdown menus -->
 <div class="container">
     <div class="row">
@@ -39,8 +39,9 @@
                 {% endfor %}
             </select>
         </div>
-    </div>   
+    </div>
 </form>
 </div>
+
 
 {% endblock %}
