@@ -6,12 +6,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-
-    with open('static/languages.json', "r", encoding="utf-8") as f:
-        langs = json.load(f)
-    with open('static/topics.json', "r", encoding="utf-8") as f:
-        topics = json.load(f)
-    return render_template("index.html", langs=langs, topics=topics)
+    message = "Välkommen idk fixa det här"
+    return render_template("index.html", message=message)
 
 @app.route("/form")
 def form():
