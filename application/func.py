@@ -3,6 +3,8 @@ import pandas as pd
 import json
 import ssl
 
+from flask import render_template
+
 def json_data_to_html_table(api_url, columns=None):
     '''Konverterar json data från api till en
     html tabell med Pandas'''
@@ -15,23 +17,24 @@ def json_data_to_html_table(api_url, columns=None):
             next_link = data["next"]
         else:
             next_link = None
-        if 'results' in data:
-            df = pd.DataFrame(data['results'])
 
-            # ni kan lägga till fler om ni vill
-            df = df[['title', 'authors', 'subjects', 'languages']]
+        try:
+            if 'results' in data:
+                df = pd.DataFrame(data['results'])
 
-            # formatera authors så man får namn
-            df['authors'] = df['authors'].apply(lambda authors: authors[0]['name'] if authors else 'No Author')
+                # ni kan lägga till fler om ni vill
+                df = df[['title', 'authors', 'subjects', 'languages']]
 
-            if columns == None:
-                table_data = df.to_html(classes="table p-5", justify="left")
-            else:
-                table_data = df.to_html(columns=columns, classes="table p-5", justify="left")
+                # formatera authors så man får namn
+                df['authors'] = df['authors'].apply(lambda authors: authors[0]['name'] if authors else 'No Author')
 
-            return table_data, next_link
-        else:
-            return "No results found"
+                if columns == None:
+                    table_data = df.to_html(classes="table p-5", justify="left")
+                else:
+                    table_data = df.to_html(columns=columns, classes="table p-5", justify="left")
+
+                return table_data, next_link
+        except:
+            return render_template("error.html")
     except Exception as e:
         return e
-

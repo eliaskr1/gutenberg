@@ -4,14 +4,15 @@ from application import func
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
     message = "Välkommen idk fixa det här"
     return render_template("index.html", message=message)
 
+
 @app.route("/form")
 def form():
-
     with open("static/languages.json", "r", encoding="utf-8") as f:
         langs = json.load(f)
     with open("static/topics.json", "r", encoding="utf-8") as f:
@@ -22,7 +23,9 @@ def form():
     previous_topic = request.cookies.get("topic", "")
     previous_language = request.cookies.get("language", "")
 
-    return render_template("form.html", langs=langs, topics=topics, previous_search=previous_search, previous_topic=previous_topic, previous_language=previous_language)
+    return render_template("form.html", langs=langs, topics=topics, previous_search=previous_search,
+                           previous_topic=previous_topic, previous_language=previous_language)
+
 
 @app.route("/api", methods=["POST"])
 def api_post():
@@ -30,7 +33,6 @@ def api_post():
     user_input = request.form.get("search_query", "").strip()  # Using strip to remove any leading/trailing spaces
     topic = request.form.get("topic", "").strip()
     language = request.form.get("language", "").strip()
-
 
     # Create a list to store valid query parameters
     params = []
@@ -52,6 +54,8 @@ def api_post():
     api_url = f"{base_url}?{'&'.join(params)}"
 
     tuple_data = func.json_data_to_html_table(api_url)
+
+
     if isinstance(tuple_data, tuple):
         data, next_link = tuple_data
     else:
@@ -64,6 +68,7 @@ def api_post():
     resp.set_cookie("language", language)
 
     return resp  # Return the response with the cookies and renders the template to show data
+
 
 # View next page of results
 @app.route("/api_next", methods=["POST"])
@@ -78,14 +83,13 @@ def api_next():
         next_link = None
 
     return render_template("table.html", data=data, next_link=next_link)
+
+
 @app.route("/error")
 def no_results_found():
     return render_template("error.html")
 
 
-
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("index.html"), 404
-
-

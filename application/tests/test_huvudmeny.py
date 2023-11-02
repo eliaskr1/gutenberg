@@ -1,5 +1,6 @@
 import os
 
+
 def test_folders_and_files_exist():
     assert "application" in os.listdir(os.curdir)
     assert "__init__.py" in os.listdir(os.curdir + "/application")
@@ -14,7 +15,18 @@ def test_folders_and_files_exist():
     assert "layout.html" in os.listdir(os.curdir + "/application/templates/")
     assert "index.html" in os.listdir(os.curdir + "/application/templates/")
     assert "form.html" in os.listdir(os.curdir + "/application/templates/")
-    assert "tests" in os.listdir(os.curdir)
-    assert "__init__.py" in os.listdir(os.curdir + "/tests")
-    assert "docs" in os.listdir(os.curdir)
+    assert "tests" in os.listdir(os.curdir + "/application")
     assert "requirements.txt" in os.listdir(os.curdir)
+    assert "header.html" in os.listdir(os.curdir + "/application/templates/")
+    assert "table.html" in os.listdir(os.curdir + "/application/templates/")
+    assert "error.html" in os.listdir(os.curdir + "/application/templates/")
+    assert "footer.html" in os.listdir(os.curdir + "/application/templates/")
+    assert "Elias_stjärnor.jpeg" in os.listdir(os.curdir + "/application/static/img")
+    assert "img" in os.listdir(os.curdir + "/application/static/")
+
+
+
+
+
+
+
