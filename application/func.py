@@ -12,22 +12,25 @@ def json_data_to_html_table(api_url, columns=None):
         json_data = request.urlopen(api_url, context=context).read()
         data = json.loads(json_data)
 
-        if 'results' in data:
-            df = pd.DataFrame(data['results'])
+        # Försök om det finns resultat (böcker)
+        try:
+            if 'results' in data:
+                df = pd.DataFrame(data['results'])
 
-            # ni kan lägga till fler om ni vill
-            df = df[['title', 'authors', 'subjects', 'languages']]
+                # ni kan lägga till fler om ni vill
+                df = df[['title', 'authors', 'subjects', 'languages']]
 
-            # formatera authors så man får namn
-            df['authors'] = df['authors'].apply(lambda authors: authors[0]['name'])
+                # Formatera authors så man får endast namn
+                df['authors'] = df['authors'].apply(lambda authors: authors[0]['name'] if authors else 'No Author')
 
-            if columns == None:
-                table_data = df.to_html(classes="table p-5", justify="left")
-            else:
-                table_data = df.to_html(columns=columns, classes="table p-5", justify="left")
+                if columns == None:
+                    table_data = df.to_html(classes="table p-5", justify="left")
+                else:
+                    table_data = df.to_html(columns=columns, classes="table p-5", justify="left")
 
-            return table_data
-        else:
-            return "No results found"
+                return table_data
+        # Om det inte finns resultat för användarens parametrar
+        except:
+            return "No results (books) were found with the desired inputs"
     except Exception as e:
-        return "No results found"
+        return e
