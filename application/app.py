@@ -78,8 +78,14 @@ def api_next():
         next_link = None
 
     return render_template("table.html", data=data, next_link=next_link)
+@app.route("/error")
+def no_results_found():
+    return render_template("error.html")
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("index.html"), 404
+
 
