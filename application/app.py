@@ -21,6 +21,7 @@ def form():
     with open("static/topics.json", "r", encoding="utf-8") as f:
         topics = json.load(f)
 
+    # To auto select previous search options
     previous_search = request.cookies.get("search_query", "")
     previous_topic = request.cookies.get("topic", "")
     previous_language = request.cookies.get("language", "")
@@ -29,7 +30,7 @@ def form():
 
 @app.route("/api", methods=["POST"])
 def api_post():
-
+    # Get users input
     user_input = request.form.get("search_query", "").strip()  # Using strip to remove any leading/trailing spaces
     topic = request.form.get("topic", "").strip()
     language = request.form.get("language", "").strip()
@@ -56,13 +57,13 @@ def api_post():
 
     data = func.json_data_to_html_table(api_url)
 
-    # Set or update the search_query cookie
+    # Set or update the cookies
     resp = make_response(render_template("table.html", data=data))
     resp.set_cookie("search_query", user_input)
     resp.set_cookie("topic", topic)
     resp.set_cookie("language", language)
 
-    return resp  # Returns the response with the cookie and renders the template to show data
+    return resp  # Return the response with the cookies and renders the template to show data
 
 
 
