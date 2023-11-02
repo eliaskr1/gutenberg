@@ -1,6 +1,10 @@
 [
     {
-      "api_key": "classic",
+      "api_key": "",
+      "display_name": "All topics"
+    },
+    {
+      "api:key": "classic",
       "display_name": "Classic Literature"
     },
     {
