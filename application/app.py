@@ -22,8 +22,10 @@ def form():
         topics = json.load(f)
 
     previous_search = request.cookies.get("search_query", "")
+    previous_topic = request.cookies.get("topic", "")
+    previous_language = request.cookies.get("language", "")
 
-    return render_template("form.html", langs=langs, topics=topics, previous_search=previous_search)
+    return render_template("form.html", langs=langs, topics=topics, previous_search=previous_search, previous_topic=previous_topic, previous_language=previous_language)
 
 @app.route("/api", methods=["POST"])
 def api_post():
@@ -32,8 +34,6 @@ def api_post():
     topic = request.form.get("topic", "").strip()
     language = request.form.get("language", "").strip()
 
-    # Set or update the latest search
-    previous_search = request.cookies.get("search_query", "")
 
     # Create a list to store valid query parameters
     params = []
@@ -57,8 +57,10 @@ def api_post():
     data = func.json_data_to_html_table(api_url)
 
     # Set or update the search_query cookie
-    resp = make_response(render_template("table.html", previous_search=previous_search, saved_search=user_input, data=data))
+    resp = make_response(render_template("table.html", data=data))
     resp.set_cookie("search_query", user_input)
+    resp.set_cookie("topic", topic)
+    resp.set_cookie("language", language)
 
     return resp  # Returns the response with the cookie and renders the template to show data
 

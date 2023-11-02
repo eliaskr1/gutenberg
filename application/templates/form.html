@@ -25,7 +25,7 @@
         <option value="" disabled selected>Choose topic</option>
         <option class="dropdown-divider" disabled>_________</option>
         {% for row in topics %}
-        <option value="{{ row["api_key"] }}">{{ row["display_name"] }}</option>
+        <option value="{{ row["api_key"] }}" {% if row["api_key"] == previous_topic %}selected{% endif %}>{{ row["display_name"] }}</option>
         {% endfor %}
       </select>
     </div>
@@ -34,7 +34,7 @@
         <option value="" disabled selected>Choose language</option>
         <option class="dropdown-divider" disabled>_________</option>
         {% for row in langs %}
-        <option value="{{ row["code"] }}">{{ row["name"] }}</option>
+        <option value="{{ row["code"] }}" {% if row["code"] == previous_language %}selected{% endif %}>{{ row["name"] }}</option>
         {% endfor %}
       </select>
     </div>
