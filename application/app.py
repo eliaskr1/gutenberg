@@ -51,15 +51,33 @@ def api_post():
     base_url = "https://gutendex.com/books/"
     api_url = f"{base_url}?{'&'.join(params)}"
 
-    data = func.json_data_to_html_table(api_url)
-
+    tuple_data = func.json_data_to_html_table(api_url)
+    if isinstance(tuple_data, tuple):
+        data, next_link = tuple_data
+    else:
+        data = tuple_data
+        next_link = None
     # Set or update the cookies
-    resp = make_response(render_template("table.html", data=data))
+    resp = make_response(render_template("table.html", data=data, next_link=next_link))
     resp.set_cookie("search_query", user_input)
     resp.set_cookie("topic", topic)
     resp.set_cookie("language", language)
 
     return resp  # Return the response with the cookies and renders the template to show data
+
+# View next page of results
+@app.route("/api_next", methods=["POST"])
+def api_next():
+    api_url = request.form.get("next")
+
+    tuple_data = func.json_data_to_html_table(api_url)
+    if isinstance(tuple_data, tuple):
+        data, next_link = tuple_data
+    else:
+        data = tuple_data
+        next_link = None
+
+    return render_template("table.html", data=data, next_link=next_link)
 
 @app.errorhandler(404)
 def page_not_found(error):

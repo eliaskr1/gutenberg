@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-<a class="btn btn-primary mt-5 mb-5" href="/form" role="button">Go back to form</a>
+<a class="btn btn-primary mt-3 mb-3" href="/form" role="button">Go back to form</a>
 {{data|safe}}
+{% if next_link %}
+<div align="right">
+    <form action="/api_next" method="POST">
+        <button type="submit" class="btn btn-primary mb-3" align="right" name="next" value="{{next_link}}">Next page</button>
+    </form>
+</div>
+{% endif %}
 {% endblock %}
