@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    message = "Välkommen idk fixa det här"
+    message = "Welcome!"
     return render_template("index.html", message=message)
 
 
@@ -85,11 +85,7 @@ def api_next():
     return render_template("table.html", data=data, next_link=next_link)
 
 
-@app.route("/error")
-def no_results_found():
-    return render_template("error.html")
-
-
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("index.html"), 404
+    message = "Welcome!"
+    return render_template("index.html", message=message), 404
