@@ -65,8 +65,6 @@ def api_post():
 
     return resp  # Return the response with the cookies and renders the template to show data
 
-
-
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("index.html"), 404
